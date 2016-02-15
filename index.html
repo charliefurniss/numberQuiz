@@ -40,7 +40,14 @@
 
     <section id="welcome-goodbye">  
             <div id="startContainer" class="container theme-showcase mainBox">  
-                <h2>{{questions.message}}</h2>
+                <h2>{{questions.message}}</h2> 
+                <div id="resultMessage">
+                <h3>You got the following questions wrong. Read 'em and weep:</h3>
+                     <div id="correct-answers" ng-repeat="correctAnswer in questions.correctAnswerArray">
+                      <li>{{correctAnswer}}</li>
+                </div>
+                </div>
+
                 <div id="submitButton">
                   <input type="submit" class="btn btn-primary" id="start-button" value="Start game" ng-click="questions.startGame()">
                 </div>
@@ -50,10 +57,7 @@
     <section id="main-game">  
         <div class="questionContainer container theme-showcase mainBox"> 
           <form class="questionForm" ng-submit="questions.checkAnswer()"> 
-            <h4 class="col-sm-4">Question: {{questions.remainingTurns}}</h4>
-            <h4 class="col-sm-4">Score: {{questions.correctAnswerCounter}}/10</h4>
-            <h4 class="col-sm-4">Wrong Answers: {{questions.wrongAnswerCounter}}/10</h4>
-
+            <h2>Question: {{questions.remainingTurns}}</h2>
             <h2 id="qNumber">{{questions.number}} is...</h2>
             <div ng-repeat="answer in questions.possibleAnswers track by $index | orderBy : random">
               <label>
@@ -61,8 +65,11 @@
               </label>
               <br><br>
             </div>
-            <div id="submitButton">
-              <input id="nextButton" type="submit" class="btn btn-primary" value="Next">
+
+            <div class="col-sm-2"><h4>Score: {{questions.correctAnswerCounter}}/10</h4></div>
+            <div class="col-sm-4"><h4>Wrong Answers: {{questions.wrongAnswerCounter}}/10</h4></div>
+            <div id="submitButton" class="col-sm-4">
+              <input id="nextButton" type="submit" class="btn btn-primary" value="Next question">
             </div>
           </form> 
         </div>

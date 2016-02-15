@@ -24,18 +24,23 @@ function QuestionsController($http) {
 	self.getQuestion();
 	self.userAnswer = "";
 	self.message = "Welcome to NumberWang!";
+	self.correctAnswerArray = [];
+	self.correctAnswerNumber;
 
 	self.startQuiz = function() {
+		$("#resultMessage").hide();
 		console.log('button clicked');
 		self.possibleAnswers = [];
 		self.remainingTurns = 0;
 		self.correctAnswerCounter = 0;
 		self.wrongAnswerCounter = 0;
 		self.getQuestion();
+		self.correctAnswerArray = [];
 	}
  
 
 	self.startGame = function() {
+		$("#resultMessage").hide();
 		console.log('button clicked');
 		self.togglePanels();
 		self.possibleAnswers = [];
@@ -43,6 +48,8 @@ function QuestionsController($http) {
 		self.correctAnswerCounter = 0;
 		self.wrongAnswerCounter = 0;
 		self.getQuestion();
+		self.correctAnswerArray = [];
+
 	}
 	
 
@@ -55,6 +62,8 @@ function QuestionsController($http) {
 
 		else {
 			self.wrongAnswerCounter++;
+			self.displayCorrectAnswer = self.correctAnswerNumber + " is " + self.correctAnswer;
+			self.correctAnswerArray.push(self.displayCorrectAnswer);
 		}
 
 		self.possibleAnswers = [];
@@ -78,11 +87,11 @@ function QuestionsController($http) {
 	
 	function getCorrectAnswer() {		
 		$http
-			.get('https://numbersapi.p.mashape.com/random/trivia?fragment=true&json=true', {
+			.get('https://numbersapi.p.mashape.com/random/trivia?fragment=true&json=true&max=999999999999999999999', {
 				headers: { 'X-Mashape-Authorization' : '1lM52liN37mshekVR70k9k6SlPrNp13RotojsnLu7QdUmr70jC' }
 			}).then(function(response) {
-				//self.responseObject = response.data;
 				self.number = response.data.number.toLocaleString();
+				self.correctAnswerNumber = self.number;
 				self.correctAnswer = response.data.text
 				console.log("THIS IS THE RIGHT ANSWER! " + self.correctAnswer);
 				self.possibleAnswers.push(response.data.text);
@@ -91,7 +100,7 @@ function QuestionsController($http) {
 	
 	function getWrongAnswer1() {
 		$http
-			.get('https://numbersapi.p.mashape.com/random/trivia?fragment=true&json=true', {
+			.get('https://numbersapi.p.mashape.com/random/trivia?fragment=true&json=true&max=999999999999999999999', {
 				headers: { 'X-Mashape-Authorization' : '1lM52liN37mshekVR70k9k6SlPrNp13RotojsnLu7QdUmr70jC' }
 			}).then(function(response) {
 				self.wrongAnswer1 = response.data.text;
@@ -100,7 +109,7 @@ function QuestionsController($http) {
 	}
 	function getWrongAnswer2() {
 		$http
-			.get('https://numbersapi.p.mashape.com/random/trivia?fragment=true&json=true', {
+			.get('https://numbersapi.p.mashape.com/random/trivia?fragment=true&json=true&max=999999999999999999999', {
 				headers: { 'X-Mashape-Authorization' : '1lM52liN37mshekVR70k9k6SlPrNp13RotojsnLu7QdUmr70jC' }
 			}).then(function(response) {
 				self.wrongAnswer2 = response.data.text;
@@ -113,6 +122,7 @@ function QuestionsController($http) {
 		$("#start-button").val("Play again");
 		$("#main-game").slideToggle("slow");
 		$("#welcome-goodbye").slideToggle("slow");
+		$("#resultMessage").show();
 	   
 	}
 	
