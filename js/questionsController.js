@@ -29,31 +29,29 @@ function QuestionsController($http) {
 		console.log(self.userAnswer);
 
 		if (self.userAnswer == self.correctAnswer) {
-			alert("You got it right!")
+			self.correctAnswerCounter++;
 		}
 
 		else {
-			alert("boooooo");
+			self.wrongAnswerCounter++;
 		}
 
 		self.possibleAnswers = [];
 		self.getQuestion();
 	}
 
+
 	function getQuestion() {
 
-		if (self.remainingTurns < 11) {
+		if (self.remainingTurns < 10) {
 			self.remainingTurns++;
 			self.getCorrectAnswer();
 			getWrongAnswer1();
 			getWrongAnswer2();
-
 		}
 		else {
 			endGame();
-		}
-
-		
+		}		
 	}
 	
 	function getCorrectAnswer() {		
@@ -62,7 +60,7 @@ function QuestionsController($http) {
 				headers: { 'X-Mashape-Authorization' : '1lM52liN37mshekVR70k9k6SlPrNp13RotojsnLu7QdUmr70jC' }
 			}).then(function(response) {
 				//self.responseObject = response.data;
-				self.number = response.data.number;
+				self.number = response.data.number.toLocaleString().;
 				self.correctAnswer = response.data.text
 				console.log("THIS IS THE RIGHT ANSWER! " + self.correctAnswer);
 				self.possibleAnswers.push(response.data.text);
@@ -90,10 +88,14 @@ function QuestionsController($http) {
 	}
 
 	function endGame(){
-		console.log("Game over");
+	   $('#nextButton').val("Reset Game");
+	   self.remainingTurns = 0;
+	   self.correctAnswerCounter = 0;
+	   self.wrongAnswerCounter = 0;
 	}
 	
 	self.random = function(){
 	   return 0.5 - Math.random();
+
 	};  
 }
