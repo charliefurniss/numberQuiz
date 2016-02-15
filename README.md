@@ -1,6 +1,5 @@
 # numberQuiz
 
 
-
-Collaborators Stewart, Charlie
+Collaborators Stewart, Charlie, Chiara
 
