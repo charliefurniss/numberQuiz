@@ -21,7 +21,7 @@ function QuestionsController($http) {
 	self.possibleAnswers = [];
 	// setCorrectAnswer();
 	// console.log(self.number);
-	self.getQuestion();
+	// self.getQuestion();
 	self.userAnswer = "";
 	self.message = "Welcome to NumberWang!";
 	self.correctAnswerArray = [];
@@ -73,7 +73,7 @@ function QuestionsController($http) {
 
 	function getQuestion() {
 
-		if (self.remainingTurns < 3) {
+		if (self.remainingTurns < 5) {
 			self.remainingTurns++;
 			self.getCorrectAnswer();
 			getWrongAnswer1();
@@ -123,6 +123,7 @@ function QuestionsController($http) {
 		$("#main-game").slideToggle("slow");
 		$("#welcome-goodbye").slideToggle("slow");
 		$("#resultMessage").show();
+		$("#welcomeMessage").hide();
 	   
 	}
 	

@@ -40,8 +40,17 @@
 
     <section id="welcome-goodbye">  
             <div id="startContainer" class="container theme-showcase mainBox">  
-                <h2>{{questions.message}}</h2> 
+                
+                <div id="welcomeMessage">
+                  <h2>Welcome to NumberWang!</h2>
+                  <h3>Rules of the game:</h3>
+                  <h4>You will be shown 5 numbers: the game is to guess which of the facts shown refers to each number.</h4>
+                  <h4>For every correct answer, you will get one point. Make sure you have a go at answering all questions, as not picking an option equals to getting a wrong answer.</h4>
+                  <h3>Good luck!</h3>
+                </div>
+
                 <div id="resultMessage">
+                  <h2>{{questions.message}}</h2> 
                 <h3>You got the following questions wrong. Read 'em and weep:</h3>
                      <div id="correct-answers" ng-repeat="correctAnswer in questions.correctAnswerArray">
                       <li>{{correctAnswer}}</li>
@@ -66,8 +75,8 @@
               <br><br>
             </div>
 
-            <div class="col-sm-2"><h4>Score: {{questions.correctAnswerCounter}}/10</h4></div>
-            <div class="col-sm-4"><h4>Wrong Answers: {{questions.wrongAnswerCounter}}/10</h4></div>
+            <div class="col-sm-2"><h4>Score: {{questions.correctAnswerCounter}}/5</h4></div>
+            <div class="col-sm-4"><h4>Wrong Answers: {{questions.wrongAnswerCounter}}/5</h4></div>
             <div id="submitButton" class="col-sm-4">
               <input id="nextButton" type="submit" class="btn btn-primary" value="Next question">
             </div>
