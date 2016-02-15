@@ -2,8 +2,11 @@ angular
 	.module('quizApp')
 	.controller('QuestionsController', QuestionsController)
 QuestionsController.$inject = ['$http'];
+
+
+
 function QuestionsController($http) {
-	console.log('This comes from QuestionsController');
+
 	var self = this;
 	self.remainingTurns = 0;
 	self.correctAnswerCounter = 0;
@@ -20,9 +23,19 @@ function QuestionsController($http) {
 	// console.log(self.number);
 	self.getQuestion();
 	self.userAnswer = "";
+
 	
 	function checkAnswer() {
 		console.log(self.userAnswer);
+
+		if (self.userAnswer == self.correctAnswer) {
+			alert("You got it right!")
+		}
+
+		else {
+			alert("boooooo");
+		}
+
 		self.possibleAnswers = [];
 		self.getQuestion();
 	}
@@ -51,7 +64,7 @@ function QuestionsController($http) {
 				//self.responseObject = response.data;
 				self.number = response.data.number;
 				self.correctAnswer = response.data.text
-				// console.log(self.number);
+				console.log("THIS IS THE RIGHT ANSWER! " + self.correctAnswer);
 				self.possibleAnswers.push(response.data.text);
 			});
 	}
@@ -72,7 +85,7 @@ function QuestionsController($http) {
 			}).then(function(response) {
 				self.wrongAnswer2 = response.data.text;
 				self.possibleAnswers.push(response.data.text);
-				console.log(self.possibleAnswers);
+				// console.log(self.possibleAnswers);
 			});
 	}
 
