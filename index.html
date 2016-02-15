@@ -40,15 +40,16 @@
 
       <section>  
         <div class="questionContainer container theme-showcase mainBox"> 
-          <form class="questionForm" ng-submit="questions.getQuestion()"> 
-            <h1 id="questionHead">Question 1</h1> 
+          <form class="questionForm" ng-submit="questions.checkAnswer()"> 
+            <h4 class="col-sm-4">Questions: {{questions.remainingTurns}}/10</h4>
+            <h4 class="col-sm-4">Score: {{questions.correctAnswerCounter}}/10</h4>
+            <h4 class="col-sm-4">Wrong Answers: {{questions.wrongAnswerCounter}}/10</h4>
+
             <h3 id="qNumber">{{questions.number}}</h3>
-            <div ng-repeat="">
-              <input class="displayedAnswers" type="radio"> a) {{questions.responseObject.text}}
-              <br><br>
-              <input class="displayedAnswers" type="radio"> b) {{questions.responseObject.text}}
-              <br><br>
-              <input class="displayedAnswers" type="radio"> c) {{questions.responseObject.text}}
+            <div ng-repeat="answer in questions.possibleAnswers | orderBy : random">
+              <label>
+                <input class="displayedAnswers" ng-model="questions.userAnswer" name="answer" value="{{answer}}" type="radio"> {{answer}}
+              </label>
               <br><br>
             </div>
             <div id="submitButton">

@@ -17,6 +17,14 @@ body {
 	margin-bottom: 20px;
 }
 
+label {
+	font-weight: 400 !important;
+}
+
+radio {
+	margin-right: 10px !important;
+}
+
 .questionForm {
 
 	padding: 20px;
