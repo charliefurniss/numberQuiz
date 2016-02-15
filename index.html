@@ -6,6 +6,7 @@
 
   <!-- LINK TO STYLE -->
   <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'/>
 
   <!-- EXTERNAL JS RESOURCES -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -20,13 +21,41 @@
   <body>
 
     <header>
-      <h1>FeelingGood</h1>
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container navCopy">
+          <div class="navbar-header">
+            <a class="navbar-brand" ui-sref="home">QuizMaster</a>
+          </div>
+          <div id="navbar">
+            <ul class="nav navbar-nav">
+              <li><a>Hello {{user}}</a></li>
+              <li><a role="button" ui-sref="quiz">Start quiz</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <main ng-controller="QuestionsController as questions">
-
-      
-
+      <section>  
+        <div class="questionContainer container theme-showcase mainBox"> 
+          <form class="questionForm" ng-submit="questions.getQuestion()"> 
+            <h1 id="questionHead">Question 1</h1> 
+            <h3 id="qNumber">{{questions.number}}</h3>
+            <div ng-repeat="">
+              <input class="displayedAnswers" type="radio"> a) {{questions.responseObject.text}}
+              <br><br>
+              <input class="displayedAnswers" type="radio"> b) {{questions.responseObject.text}}
+              <br><br>
+              <input class="displayedAnswers" type="radio"> c) {{questions.responseObject.text}}
+              <br><br>
+            </div>
+            <div id="submitButton">
+              <input type="submit" class="btn btn-primary" value="Next">
+            </div>
+          </form> 
+        </div>
+      </section>  
     </main>
 
 
