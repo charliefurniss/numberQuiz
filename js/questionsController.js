@@ -34,6 +34,7 @@ function QuestionsController($http) {
 				self.correctAnswer = response.data.text
 				console.log(self.number);
 			});
+
 	}
 	
 	function getWrongAnswer1() {
@@ -53,6 +54,7 @@ function QuestionsController($http) {
 			}).then(function(response) {
 				self.wrongAnswer2 = response.data.text;
 			});
+
 	}
 	
 
