@@ -23,8 +23,29 @@ function QuestionsController($http) {
 	// console.log(self.number);
 	self.getQuestion();
 	self.userAnswer = "";
+	self.message = "Welcome to NumberWang!";
 
+	self.startQuiz = function() {
+		console.log('button clicked');
+		self.possibleAnswers = [];
+		self.remainingTurns = 0;
+		self.correctAnswerCounter = 0;
+		self.wrongAnswerCounter = 0;
+		self.getQuestion();
+	}
+ 
+
+	self.startGame = function() {
+		console.log('button clicked');
+		self.togglePanels();
+		self.possibleAnswers = [];
+		self.remainingTurns = 0;
+		self.correctAnswerCounter = 0;
+		self.wrongAnswerCounter = 0;
+		self.getQuestion();
+	}
 	
+
 	function checkAnswer() {
 		console.log(self.userAnswer);
 
@@ -43,13 +64,14 @@ function QuestionsController($http) {
 
 	function getQuestion() {
 
-		if (self.remainingTurns < 10) {
+		if (self.remainingTurns < 3) {
 			self.remainingTurns++;
 			self.getCorrectAnswer();
 			getWrongAnswer1();
 			getWrongAnswer2();
 		}
 		else {
+			self.message = "Well done! You got " +  self.correctAnswerCounter + " right answers and " + self.wrongAnswerCounter + " wrong answers (boooooooo!)";
 			endGame();
 		}		
 	}
@@ -60,7 +82,7 @@ function QuestionsController($http) {
 				headers: { 'X-Mashape-Authorization' : '1lM52liN37mshekVR70k9k6SlPrNp13RotojsnLu7QdUmr70jC' }
 			}).then(function(response) {
 				//self.responseObject = response.data;
-				self.number = response.data.number.toLocaleString().;
+				self.number = response.data.number.toLocaleString();
 				self.correctAnswer = response.data.text
 				console.log("THIS IS THE RIGHT ANSWER! " + self.correctAnswer);
 				self.possibleAnswers.push(response.data.text);
@@ -88,12 +110,19 @@ function QuestionsController($http) {
 	}
 
 	function endGame(){
-	   $('#nextButton').val("Reset Game");
-	   self.remainingTurns = 0;
-	   self.correctAnswerCounter = 0;
-	   self.wrongAnswerCounter = 0;
+		$("#start-button").val("Play again");
+		$("#main-game").slideToggle("slow");
+		$("#welcome-goodbye").slideToggle("slow");
+	   
 	}
 	
+	self.togglePanels = function(){
+		console.log("got to here");
+	  $("#main-game").slideToggle("slow");
+	  $("#welcome-goodbye").slideToggle("slow");
+	}
+
+
 	self.random = function(){
 	   return 0.5 - Math.random();
 

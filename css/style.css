@@ -13,6 +13,10 @@ body {
 
 }
 
+#main-game {
+	display: none;
+}
+
 #qNumber {
 	margin-bottom: 20px;
 }

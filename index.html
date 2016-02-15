@@ -11,7 +11,7 @@
   <!-- EXTERNAL JS RESOURCES -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-  
+
     
   <!-- INTERNAL JS RESOURCES -->
   <script src="./js/app.js"></script>
@@ -19,35 +19,43 @@
 
 </head>
 
-  <body>
+  <body ng-controller="QuestionsController as questions">
 
     <header>
       <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container navCopy">
           <div class="navbar-header">
-            <a class="navbar-brand" ui-sref="home">QuizMaster</a>
+            <a class="navbar-brand" ui-sref="home">NumberWang</a>
           </div>
           <div id="navbar">
-            <ul class="nav navbar-nav">
-              <li><a>Hello {{user}}</a></li>
-              <li><a role="button" ui-sref="quiz">Start quiz</a></li>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a role="button" ng-click="questions.startQuiz()">Start quiz</a></li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
 
-    <main ng-controller="QuestionsController as questions">
+    <main>
 
-      <section>  
+    <section id="welcome-goodbye">  
+            <div id="startContainer" class="container theme-showcase mainBox">  
+                <h2>{{questions.message}}</h2>
+                <div id="submitButton">
+                  <input type="submit" class="btn btn-primary" id="start-button" value="Start game" ng-click="questions.startGame()">
+                </div>
+            </div>
+    </section>
+
+    <section id="main-game">  
         <div class="questionContainer container theme-showcase mainBox"> 
           <form class="questionForm" ng-submit="questions.checkAnswer()"> 
-            <h4 class="col-sm-4">Questions: {{questions.remainingTurns}}/10</h4>
+            <h4 class="col-sm-4">Question: {{questions.remainingTurns}}</h4>
             <h4 class="col-sm-4">Score: {{questions.correctAnswerCounter}}/10</h4>
             <h4 class="col-sm-4">Wrong Answers: {{questions.wrongAnswerCounter}}/10</h4>
 
-            <h3 id="qNumber">{{questions.number}}</h3>
-            <div ng-repeat="answer in questions.possibleAnswers | orderBy : random">
+            <h2 id="qNumber">{{questions.number}} is...</h2>
+            <div ng-repeat="answer in questions.possibleAnswers track by $index | orderBy : random">
               <label>
                 <input class="displayedAnswers" ng-model="questions.userAnswer" name="answer" value="{{answer}}" type="radio"> {{answer}}
               </label>
@@ -58,7 +66,7 @@
             </div>
           </form> 
         </div>
-      </section>  
+    </section>  
 
     </main>
 
