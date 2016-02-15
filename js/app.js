@@ -1,2 +1,2 @@
 angular
-	.module('quizApp', ['ngResource']);
+	.module('quizApp', []);
